@@ -1,0 +1,59 @@
+# I first examined my raw reads with NanoPlot version 1.33
+#This is the NanoPlot general stats summary report for the Raw Guppy basecalled output
+file://anufiles.anu.edu.au/anu/RSB/Home/u6662175/My%20Documents/Honours%20on%20local%20drive/data/Pen%20Y%20Genome%20Stuff/PenYGenome/SimplexNp_stuff/NanoPlot-report.html
+General summary:         
+Mean read length:                16,818.2
+Mean read quality:                   10.0
+Median read length:               7,362.0
+Median read quality:                 14.8
+Number of reads:                281,746.0
+Read length N50:                 36,841.0
+STDEV read length:               21,307.5
+Total bases:              4,738,458,172.0
+Number, percentage and megabases of reads above quality cutoffs
+>Q5:	260540 (92.5%) 4588.3Mb
+>Q7:	232422 (82.5%) 4199.9Mb
+>Q10:	214025 (76.0%) 3917.8Mb
+>Q12:	192400 (68.3%) 3592.6Mb
+>Q15:	137163 (48.7%) 2824.7Mb
+Top 5 highest mean basecall quality scores and their read lengths
+1:	27.9 (265)
+2:	25.6 (219)
+3:	25.5 (277)
+4:	25.5 (197)
+5:	25.4 (1154)
+Top 5 longest reads and their mean basecall quality score
+1:	1155620 (2.4)
+2:	426259 (3.9)
+3:	346914 (3.7)
+4:	290969 (4.1)
+5:	279462 (11.7)
+
+#This is the NanoPlot general report for the Raw Dorado (with duplex) basecalled output
+General summary:         
+Mean read length:                17,006.9
+Mean read quality:                   10.3
+Median read length:               7,824.0
+Median read quality:                 15.3
+Number of reads:                304,973.0
+Read length N50:                 36,279.0
+STDEV read length:               20,932.0
+Total bases:              5,186,636,187.0
+Number, percentage and megabases of reads above quality cutoffs
+>Q5:	282504 (92.6%) 5008.9Mb
+>Q7:	255677 (83.8%) 4628.1Mb
+>Q10:	236983 (77.7%) 4359.8Mb
+>Q12:	215877 (70.8%) 4058.1Mb
+>Q15:	159276 (52.2%) 3291.3Mb
+Top 5 highest mean basecall quality scores and their read lengths
+1:	39.5 (2033; 07e36ee8-3776-456d-a6d6-5bc916b7ad7b;cff46c2d-bffd-4bb0-aee1-318dd97237b6)
+2:	39.2 (2697; ebafb2a0-1298-48fc-8b1c-40447879d4d1;66299753-716c-4822-a865-ac9f4c8f7b34)
+3:	38.8 (1194; e5555692-ca89-4fa1-a89e-f5b3c8fa1b9f;7486263c-6bda-4daf-b136-691efdbad437)
+4:	38.7 (3751; 0bd87235-7b62-4555-ac2e-05bb140a4dd5;ffe380cc-ad2b-4115-b84b-fec453b4588e)
+5:	38.7 (3542; 1fef7663-706d-4348-943d-9bbd620f881b;48694108-ef6c-4d15-ad4b-9a240ad873db)
+Top 5 longest reads and their mean basecall quality score
+1:	878498 (3.9; f3201f8f-8c94-4c32-bbec-891bda5534d7)
+2:	363372 (4.2; 83adde67-5099-4d86-b7ef-4a7edea4c145)
+3:	362080 (3.0; 44d8ff6f-2ac6-4e29-ba57-1245b108f168)
+4:	296891 (3.9; 7ea179b6-b599-4628-aec8-620ea3c8fc58)
+5:	281403 (8.4; ceaf1efc-f7b9-45d2-9890-4036542a77d6)
