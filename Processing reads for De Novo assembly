@@ -38,7 +38,7 @@ Median read quality:                 15.3
 Number of reads:                304,973.0
 Read length N50:                 36,279.0
 STDEV read length:               20,932.0
-Total bases:              5,186,636,187.0
+Total bases:              5,186,636,187.0   # quite a few more bases were basecalled by Dorado: Dorado called 448,178,015 more bases than Guppy.  
 Number, percentage and megabases of reads above quality cutoffs
 >Q5:	282504 (92.6%) 5008.9Mb
 >Q7:	255677 (83.8%) 4628.1Mb
@@ -57,3 +57,8 @@ Top 5 longest reads and their mean basecall quality score
 3:	362080 (3.0; 44d8ff6f-2ac6-4e29-ba57-1245b108f168)
 4:	296891 (3.9; 7ea179b6-b599-4628-aec8-620ea3c8fc58)
 5:	281403 (8.4; ceaf1efc-f7b9-45d2-9890-4036542a77d6)
+
+#My next step was to isolate the duplex calls from the dorado basecalled data which includes both simplex and duplex basecalled data.
+#Since the output of dorado is a Bam file, i first convereted this to fastQ using samtools
+INSERT COMMAND USED
+#
