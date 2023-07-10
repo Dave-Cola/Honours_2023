@@ -1,6 +1,14 @@
 Genome Assembly
 
-Fist attempt with Verkko
+#Fist attempt with Verkko
 HiFi q > 20, l > 1000
 Nano q 6-20, l > 40,000
+--Haploid option
+
+#Using Quast to assess the assembly
+
+
+#Second attempt with Verkko
+HiFi q > 15, l > 1000
+Nano q > 6-15, l > 40000
 --Haploid option
