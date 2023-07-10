@@ -83,4 +83,4 @@ Splitting reads containing middle adapters
 
 65 / 304,973 reads were split based on middle adapters
 
-#I have also trimmed some both dorado and duplex with the ab initio prediction turned which led to a similar amount of bases being trimmed. THe Start adaptor was easilt identified by the ab intio prediction algorithm, though it had trouble with the end adaptor. 
+#I have also trimmed some both dorado and duplex with the ab initio prediction turned which led to a similar amount of bases being trimmed. The Start adaptor was easily identified by the ab intio prediction algorithm, though it had trouble with the end adaptor.
