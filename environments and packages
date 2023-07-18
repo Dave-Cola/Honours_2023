@@ -1,0 +1,19 @@
+#All environment names and the packages installed there.
+Buscoy                   /mnt/data/dayhoff/home/u6662175/.conda/envs/Buscoy #Busco
+Mpolish                  /mnt/data/dayhoff/home/u6662175/.conda/envs/Mpolish #unknown, supposed to be medaka
+Verkyes                  /mnt/data/dayhoff/home/u6662175/.conda/envs/Verkyes #Verkko
+cany                     /mnt/data/dayhoff/home/u6662175/.conda/envs/cany #Canu
+chopchop                 /mnt/data/dayhoff/home/u6662175/.conda/envs/chopchop #chopper
+choppy                   /mnt/data/dayhoff/home/u6662175/.conda/envs/choppy #porechop_abi
+crammy                   /mnt/data/dayhoff/home/u6662175/.conda/envs/crammy #cramino
+filthy                   /mnt/data/dayhoff/home/u6662175/.conda/envs/filthy #filtlong?
+flyguy                *  /mnt/data/dayhoff/home/u6662175/.conda/envs/flyguy #flye
+mamcany                  /mnt/data/dayhoff/home/u6662175/.conda/envs/mamcany #canu through mamba
+mamcany2                 /mnt/data/dayhoff/home/u6662175/.conda/envs/mamcany2 #canu through mamba
+medake                   /mnt/data/dayhoff/home/u6662175/.conda/envs/medake #medaka
+polishy                  /mnt/data/dayhoff/home/u6662175/.conda/envs/polishy #unknown
+quasty                   /mnt/data/dayhoff/home/u6662175/.conda/envs/quasty #QUAST
+sammy                    /mnt/data/dayhoff/home/u6662175/.conda/envs/sammy #samtools
+statty                   /mnt/data/dayhoff/home/u6662175/.conda/envs/statty #NanoStat
+test                     /mnt/data/dayhoff/home/u6662175/.conda/envs/test #NanoPlot
+base                     /opt/mambaforge
