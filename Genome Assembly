@@ -11,4 +11,12 @@ Nano q 6-20, l > 40,000
 #Second attempt with Verkko
 HiFi q > 15, l > 1000
 Nano q > 6-15, l > 40000
+HiFi: long_PCabi_dor_Q6_15_l40_readset.fastq, Nano: Accurate_PCabi_dor_Q15_L1k_readset.fastq
 --Haploid option
+
+# Canu_assembly_2
+# With the abiPC_Dor_12Q_15kb.fastq dataset 
+# canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_2 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/abiPC_Dor_12Q_15kb.fastq
+
+# Canu_Assembly_1
+# canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_1 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fast
