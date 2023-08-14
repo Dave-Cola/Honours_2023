@@ -1,0 +1,3 @@
+# A command to extract a certain record out of a fasta file
+$ grep -wEA1 --no-group-separator 'chr1|chr2|chr21|chrX' file.fa # this is an example found on the internet.
+
