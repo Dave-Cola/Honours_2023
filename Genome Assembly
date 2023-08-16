@@ -20,3 +20,8 @@ HiFi: long_PCabi_dor_Q6_15_l40_readset.fastq, Nano: Accurate_PCabi_dor_Q15_L1k_r
 
 # Canu_Assembly_1
 # canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_1 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fast
+
+
+#Canu_Assembly_4_1 
+canu -assemble -p 4_1Pen_Y_15q_10kb -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4_1 genomeSize=30m --useGrid=true -corrected -trimmed -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4/4_Pen_Y_15q_10kb.trimmedReads.fasta.gz gridOptions="--time=72-00:00"
+#tried to restart a failed assembly
