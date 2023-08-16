@@ -1,11 +1,9 @@
 Genome Assembly
-
+#Using Quast, FindTelomeres.py and Busco to assess the assemblies.
 #Fist attempt with Verkko
 HiFi q > 20, l > 1000
 Nano q 6-20, l > 40,000
 --Haploid option
-
-#Using Quast to assess the assembly
 
 
 #Second attempt with Verkko
@@ -21,7 +19,6 @@ HiFi: long_PCabi_dor_Q6_15_l40_readset.fastq, Nano: Accurate_PCabi_dor_Q15_L1k_r
 # Canu_Assembly_1
 # canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_1 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fast
 
-
 #Canu_Assembly_4_1 
 canu -assemble -p 4_1Pen_Y_15q_10kb -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4_1 genomeSize=30m --useGrid=true -corrected -trimmed -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4/4_Pen_Y_15q_10kb.trimmedReads.fasta.gz gridOptions="--time=72-00:00"
 #tried to restart a failed assembly
@@ -32,3 +29,5 @@ Canu_Assembly_4_2
 #Canu_Assembly_5
 #A Canu Assembly with all the trimmed read data. I.e. there is no quality or length filtering before assembly. 
 canu -p 5Pen_Y_ALL -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_5 genomeSize=30m --useGrid=true -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fastq gridOptions="--time=72-00:00 --mem-per-cpu=7000"
+
+#Flye Assemblies
