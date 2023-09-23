@@ -1,0 +1,8 @@
+Steps
+#1 convert raw ONT fast5 into pod5 file type (pod5-file-format tool)
+#2 basecall the pod5 files into sequences using dorado duplex basecaller (1st attempt = Dorado v0.3.0 duplex basecalling on fast5 converted to pod5 files. I used the 'dorado duplex' command with the 'dna_r10.4.1_e8.2_400bps_sup@v4.1.0' model)
+#3 Use porechop to trim and split reads for adaptors(abi or no abi?)
+#4 qulaity control and subset reads based on quality and length(optional)
+#5 feed these QC'd datasets into an assembler (ive tried Canu, Flye and verkko)
+#6 draft genome assembly quality assessment using busco, quast and Findtelomeres.py
+#7 iterate draft assembly through a genome polishing tool (medaka)
