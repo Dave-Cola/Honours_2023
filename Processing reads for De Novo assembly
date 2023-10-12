@@ -1,6 +1,6 @@
 # I first examined my raw reads with NanoPlot version 1.33
 #This is the NanoPlot general stats summary report for the Raw Guppy basecalled output
-file://anufiles.anu.edu.au/anu/RSB/Home/u6662175/My%20Documents/Honours%20on%20local%20drive/data/Pen%20Y%20Genome%20Stuff/PenYGenome/SimplexNp_stuff/NanoPlot-report.html
+
 General summary:         
 Mean read length:                16,818.2
 Mean read quality:                   10.0
@@ -30,6 +30,7 @@ Top 5 longest reads and their mean basecall quality score
 5:	279462 (11.7)
 
 #This is the NanoPlot general report for the Raw Dorado (with duplex) basecalled output
+
 General summary:         
 Mean read length:                17,006.9
 Mean read quality:                   10.3
@@ -59,11 +60,44 @@ Top 5 longest reads and their mean basecall quality score
 5:	281403 (8.4; ceaf1efc-f7b9-45d2-9890-4036542a77d6)
 
 #My next step was to isolate the duplex calls from the dorado basecalled data which includes both simplex and duplex basecalled data.
+#This was done in order to examine the proportion of reads that were duplex and to potentially use this data set for Verkko.
 #Since the output of dorado is a Bam file, i first convereted this to fastQ using samtools
 $ grep -A 3 "dx:i:1" Wdx_PYduplex.fq | grep -v '^ *-- *$' > JustPYduplex.fq
 # The "dx:i:1" is a header tag that indicates the record is a duplex read, while "dx:i:0" indicates simplex. This grep find all the headers with the duplex tag and then takes 3 lines of trailing context which inlcudes the base sequence, + line and the base qaulity sequence.
 #The Next Grep removess all the liness with -- because these are inserted between all the grep hits.
-# Trimming adaptors using porechop_abi (The ab initio new version). 
+#Using nanoplot I generated a general summary for just the duplex basecalls.
+$ NanoPlot -t 4 --fastq JustPYduplex.fq
+
+General summary:
+Mean read length:               21,414.3
+Mean read quality:                  16.5
+Median read length:             17,478.5
+Median read quality:                26.3
+Number of reads:                21,708.0
+Read length N50:                35,957.0
+STDEV read length:              20,628.3
+Total bases:               464,861,552.0
+Number, percentage and megabases of reads above quality cutoffs
+>Q5:    21166 (97.5%) 449.0Mb
+>Q7:    21166 (97.5%) 449.0Mb
+>Q10:   21166 (97.5%) 449.0Mb
+>Q12:   21142 (97.4%) 448.8Mb
+>Q15:   20748 (95.6%) 442.2Mb
+Top 5 highest mean basecall quality scores and their read lengths
+1:      39.5 (2033)
+2:      39.2 (2697)
+3:      38.8 (1194)
+4:      38.7 (3751)
+5:      38.7 (3542)
+Top 5 longest reads and their mean basecall quality score
+1:      172229 (21.1)
+2:      150151 (25.5)
+3:      149656 (26.2)
+4:      143647 (28.2)
+5:      140774 (29.1)
+
+#TRIMMING ADAPTORS
+#Trimming adaptors using Porechop_ABI v_0.5.0 (The latest version of porechop that can use ab initio predcition to determine the adaptor sequences). 
 #The command was as follows. 
 $ porechop_abi -i Wdx_PYduplex.fq -o NOabi_PC_dorado.gz
 Trimming adapters from read ends
@@ -83,4 +117,4 @@ Splitting reads containing middle adapters
 
 65 / 304,973 reads were split based on middle adapters
 
-#I have also trimmed some both dorado and duplex with the ab initio prediction turned which led to a similar amount of bases being trimmed. The Start adaptor was easily identified by the ab intio prediction algorithm, though it had trouble with the end adaptor.
+#I have also trimmed some both dorado and duplex with the ab initio prediction turned off which led to a similar amount of bases being trimmed. The Start adaptor was easily identified by the ab intio prediction algorithm, though it had trouble with the end adaptor.
