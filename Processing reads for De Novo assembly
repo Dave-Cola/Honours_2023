@@ -61,7 +61,7 @@ Top 5 longest reads and their mean basecall quality score
 
 #My next step was to isolate the duplex calls from the dorado basecalled data which includes both simplex and duplex basecalled data.
 #This was done in order to examine the proportion of reads that were duplex and to potentially use this data set for Verkko.
-#Since the output of dorado is a Bam file, i first convereted this to fastQ using samtools
+#Since the output of dorado is a Bam file, i first convereted this to a fastQ format using samtools
 $ grep -A 3 "dx:i:1" Wdx_PYduplex.fq | grep -v '^ *-- *$' > JustPYduplex.fq
 # The "dx:i:1" is a header tag that indicates the record is a duplex read, while "dx:i:0" indicates simplex. This grep find all the headers with the duplex tag and then takes 3 lines of trailing context which inlcudes the base sequence, + line and the base qaulity sequence.
 #The Next Grep removess all the liness with -- because these are inserted between all the grep hits.
