@@ -1,0 +1,96 @@
+install.packages(c("tidyverse","hrbrthemes","tm","proustr"))
+install.packages("VennDiagram")
+library(dplyr)
+library(tximport)
+
+Rust1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+Rust2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+Rust3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+
+#combining the Salmon abundance (TPM from salmon) information into a single matrix
+TPMmatrix<-data.frame(Rust1$abundance,Rust2$abundance, Rust3$abundance, PDB1$abundance,PDB2$abundance, PDB3$abundance, water1$abundance,water2$abundance, water3$abundance)
+row.names(TPMmatrix)<-row.names(Rust1$abundance)
+
+TPMmatrixPDB <- rowSums(TPMmatrix[,c(4,5,6)])
+TPMmatrixPDB_mean <- TPMmatrixPDB[]/3
+TPMmatrixPDB_mean <- as.data.frame(TPMmatrixPDB_mean)
+TPMmatrixPDB_expressed_100 <- TPMmatrixPDB_mean %>% filter(TPMmatrixPDB_mean > 1) #here the threshold for expression is set at an average of 1 TPM
+
+
+TPMmatrixRust <- rowSums(TPMmatrix[,c(1,2,3)])
+TPMmatrixRust_mean <- TPMmatrixRust[]/3
+TPMmatrixRust_mean <- as.data.frame(TPMmatrixRust_mean)
+TPMmatrixRust_expressed_100 <- TPMmatrixRust_mean %>% filter(TPMmatrixRust_mean > 1)
+
+TPMmatrixwater <- rowSums(TPMmatrix[,c(7,8,9)])
+TPMmatrixwater_mean <- TPMmatrixwater[]/3
+TPMmatrixwater_mean <- as.data.frame(TPMmatrixwater_mean)
+TPMmatrixwater_expressed_100 <- TPMmatrixwater_mean %>% filter(TPMmatrixwater_mean > 1)
+
+View(Rustonly)
+#Graphing venn Diagrams
+
+library(tidyverse)
+library(hrbrthemes)
+library(tm)
+library(proustr)
+
+# Load library
+library(VennDiagram)
+
+# Generate 3 sets
+PDB_explist <- row.names(TPMmatrixPDB_expressed_100)
+Rust_explist <- row.names(TPMmatrixRust_expressed_100)
+water_explist <- row.names(TPMmatrixwater_expressed_100)
+
+# Prepare a palette of 3 colors with R colorbrewer:
+library(RColorBrewer)
+myCol <- c("#2171B5", "#D94701", "#66FF00")
+
+# Chart
+Venny <- venn.diagram(
+  x = list(PDB_explist, Rust_explist, water_explist), 
+  category.names = c('PDB','Pst spores', 'Water'), filename = 'peny_TPM1_expressed_genes_venn_diagram.png',output=TRUE, ext.text = FALSE,
+  
+  #Titles and such
+  main = "Expressed genes
+  9,522/10,499", main.fontface = 0.5 ,main.fontfamily = "sans" ,main.cex = 0.9,
+  
+  euler.d = TRUE,
+  scaled = TRUE,
+  #sep.dist = 10,
+  #Output features
+  imagetype="png" ,
+  height = 2000 , 
+  width = 2000 , 
+  resolution = 400,
+  compression = "lzw",
+  
+  #Circles
+  lwd = 2,
+  lty = 'blank',
+  fill = myCol,
+  
+  #Numbers
+  cex = .9,
+  fontface = "bold",
+  fontfamily = "sans",
+  
+  # Set names
+  cat.cex = 0.8,
+  cat.fontface = "bold",
+  cat.default.pos = "text",
+  cat.pos = c(-10, 10, 180),
+  cat.dist = c(0.05, 0.05, 0.04),
+  cat.fontfamily = "sans",
+  #rotation = 2
+  
+)
+
+Venny
