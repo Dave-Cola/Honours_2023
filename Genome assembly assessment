@@ -1,2 +1,17 @@
-# I have used QUAST and Busco to assess the verkko assemblies
-# 
+# I have used QUAST, BUSCO and FindTelomeres.py to assess all assemblies and polished finished genome assembly. 
+
+#For Quast (v5.2.0)
+$ quast *CONTIGS.FASTA* -o quast_output
+#  *CONTIGS.FASTA* is standing in the particular assembly being assessed
+# -o output directory for quast results
+
+#For BUSCO analysis (v5.4.7)
+$ busco -m genome -i *CONTIGS.FASTA* -o Ref_p_olsonii_Busco_analy -l eurotiales_odb10
+#  *CONTIGS.FASTA* is standing in the particular assembly being assessed
+# -l eurotiales_odb10 # This specifies the lineage-set of BUSCOS to search for. 
+# This is the latest Eurotiales lineage set
+# -m genome #Mode is genome, this was changeed to -m transcriptome for the BUSCO analysis of the mRNA transcript set. 
+
+# For telomere identification
+python3 Findtelomere.py *CONTIGS.FASTA*
+# in a python environment
