@@ -1,33 +1,22 @@
-Genome Assembly
-#Using Quast, FindTelomeres.py and Busco to assess the assemblies.
-#Fist attempt with Verkko
-HiFi q > 20, l > 1000
-Nano q 6-20, l > 40,000
---Haploid option
 
+# Canu Genome Assembly
+#Subsetting reads with Chopper (v0.6.0)
+$ cat PC_abi_trimmed_dorado.fastq | chopper -q 12 -l 15000 > abiPC_Dor_12Q_15kb.fastq
+# -q option refers to the minimmum Phred score
+# -l option referes to the minumum length in bp
 
-#Second attempt with Verkko
-HiFi q > 15, l > 1000
-Nano q > 6-15, l > 40000
-HiFi: long_PCabi_dor_Q6_15_l40_readset.fastq, Nano: Accurate_PCabi_dor_Q15_L1k_readset.fastq
---Haploid option
-
-# Canu_assembly_2
+# This produced a read set with all reads over 12Q and longer than 15 kb in length
+# Canu_assembly_2 -Canu version
 # With the abiPC_Dor_12Q_15kb.fastq dataset 
-# canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_2 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/abiPC_Dor_12Q_15kb.fastq
+$ canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_2 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/abiPC_Dor_12Q_15kb.fastq
+#  the genomeSize=30m option sets the expected genome size to 30 Mb
+#  the -nanopore  option tells canu to expect nanopore read data
 
-# Canu_Assembly_1
-# canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_1 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fast
+#Flye Assembly with whole read set
+$ flye --nano-raw /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fastq --min-overlap 5000 --genome-size 30m -o /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Everything_Flyes
+# --nano-raw tells flye what read data to expect, including what level of quality score Flye can expect
+# -min-overlap 5000 #This option sets the minimum overlap length in bp between two reads for assembly into contigs 
+# --genome-size 30m # option sets the expected genome size to 30 Mb
 
-#Canu_Assembly_4_1 
-canu -assemble -p 4_1Pen_Y_15q_10kb -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4_1 genomeSize=30m --useGrid=true -corrected -trimmed -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_4/4_Pen_Y_15q_10kb.trimmedReads.fasta.gz gridOptions="--time=72-00:00"
-#tried to restart a failed assembly
 
-Canu_Assembly_4_2
-#It worked! changed the grid options to include --mem-per-cpu=7000 which increases the default of 4gb per cpu to 7. This seesm to have fixed the issues i was having with Canu.
-
-#Canu_Assembly_5
-#A Canu Assembly with all the trimmed read data. I.e. there is no quality or length filtering before assembly. 
-canu -p 5Pen_Y_ALL -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_5 genomeSize=30m --useGrid=true -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fastq gridOptions="--time=72-00:00 --mem-per-cpu=7000"
-
-#Flye Assemblies
+#I used Quast, FindTelomeres.py and Busco to assess the assemblies.
