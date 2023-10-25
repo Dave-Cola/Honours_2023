@@ -1,0 +1,10 @@
+#Long read polishing of Canu assembly using Medaka (v1.8.1)
+
+$ medaka_consensus -d Pen_Y2.contigs.fasta -i PC_abi_trimmed_dorado.fastq -t 12 -o Mpolish1 -m r1041_e82_400bps_sup_v4.2.0
+# -i  PC_abi_trimmed_dorado.fastq # Whole Trimmed read set
+#- d Pen_Y2.contigs.fasta  # Canu_2 assembly contigs in fasta
+# -o Mpolish1 # output directory name
+# -m r1041_e82_400bps_sup_v4.2.0 # model used to base call reads
+
+# The polished contigs output of this command (assembly.fasta) was rerun through the same medaka_consensus command.
+# This meant the assembly went through two rounds of Medaka polishing
