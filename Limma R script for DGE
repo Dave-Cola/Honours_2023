@@ -1,0 +1,73 @@
+# Limma R script for DGE analysis
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("edgeR")
+BiocManager::install("limma")
+BiocManager::install("tximport")
+#importing the Salmon files
+library(limma)
+library(edgeR)
+library(tximport)
+
+Rust1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+Rust2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+Rust3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_rust3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+PDB3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_pdb3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water1 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water1/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water2 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water2/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+water3 <-tximport("./Salmon_Quant_files/salmon_output_dc/salmon_peny_water3/quant.sf", type = c("salmon"), txIn = TRUE, txOut = TRUE, countsFromAbundance = c("lengthScaledTPM"),dropInfReps=TRUE)
+
+#combining the Salmon count information into a single matrix
+countmatrix<-data.frame(Rust1$counts,Rust2$counts, Rust3$counts, PDB1$counts,PDB2$counts, PDB3$counts, water1$counts,water2$counts, water3$counts)
+row.names(countmatrix)<-row.names(Rust1$counts)
+plotMDS(countmatrix, labels = c('R1','R2','R3','P1','P2','P3','W1','W2','W3'))
+
+#import design matrix (generated seperately in excel)
+design<-read.csv("./3way/Rust PDB, and Water.csv")
+
+#filtering genes by expression
+dge <- DGEList(counts=countmatrix)
+group <- as.factor(c("Rust","Rust","Rust","PDB","PDB","PDB", "water","water","water"))
+keep <- filterByExpr(dge, group=group)
+dge <- dge[keep,,keep.lib.sizes=FALSE]
+
+#checking the results of filtering
+dim(dge)
+dim(design)
+
+#calculate normalization factors based on library sizes after filtering lowly expressed stuff)
+dge <- calcNormFactors(dge)
+
+#Use voom to determine weights for each gene to be passed to limma, voom normalises the data
+v<-voom(dge, design, plot=TRUE)
+#Principal component analysis of the filtered and normalised data
+plotMDS(x = v$E, 
+        labels = c('R1','R2','R3','P1','P2','P3','W1','W2','W3'),
+        top = 1000,
+        gene.selection = "common",
+        col = c(rep("red",3), rep("green",3), rep("blue",3)))
+
+#fit linear model for each gene
+fit <- lmFit(v,design)
+
+#define the comparisons you want to examine, here i am contrasting growth on rust to growth in PDB and water pooled with half weight each.
+contrast.matrix <- makeContrasts(Rust - (PDB + water)/2, levels = design)
+
+#estimate contrasts for each gene
+fit2 <- contrasts.fit(fit, contrast.matrix)
+
+#Smoothing of standard error
+fit2 <- eBayes(fit2)
+
+#Generate results tables
+table_penY_RustvsPDBandwater <- topTable(fit2,coef=1, number=Inf)
+
+#Export transcriptome profiles
+write.csv(table_penY_RustvsPDBandwater, file = "table_penY_RustvsPDBandwaterd2.csv")
+
+table_penY_RustvsPDBandwater
+
+## table_penY_RustvsPDB is a file that may then be used to generate graphs to display data, such as the Volcano plot
