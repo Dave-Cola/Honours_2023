@@ -1,34 +1,11 @@
 # I examined my raw reads with NanoPlot version 1.33
-
 #This is the NanoPlot general stats summary report for the Raw Guppy basecalled output
+#This is an example of a NanoPLot command i would run - all other options were defaults
 
-General summary:         
-Mean read length:                16,818.2
-Mean read quality:                   10.0
-Median read length:               7,362.0
-Median read quality:                 14.8
-Number of reads:                281,746.0
-Read length N50:                 36,841.0
-STDEV read length:               21,307.5
-Total bases:              4,738,458,172.0
-Number, percentage and megabases of reads above quality cutoffs
->Q5:	260540 (92.5%) 4588.3Mb
->Q7:	232422 (82.5%) 4199.9Mb
->Q10:	214025 (76.0%) 3917.8Mb
->Q12:	192400 (68.3%) 3592.6Mb
->Q15:	137163 (48.7%) 2824.7Mb
-Top 5 highest mean basecall quality scores and their read lengths
-1:	27.9 (265)
-2:	25.6 (219)
-3:	25.5 (277)
-4:	25.5 (197)
-5:	25.4 (1154)
-Top 5 longest reads and their mean basecall quality score
-1:	1155620 (2.4)
-2:	426259 (3.9)
-3:	346914 (3.7)
-4:	290969 (4.1)
-5:	279462 (11.7)
+$ NanoPlot --outdir NPreults/ --prefix RAWduplex --fastq PYduplex.fastq
+
+#below is the general report output for the 
+
 
 #This is the NanoPlot general report for the Raw Dorado (with duplex) basecalled output
 
