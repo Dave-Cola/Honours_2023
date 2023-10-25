@@ -6,13 +6,13 @@ $ cat PC_abi_trimmed_dorado.fastq | chopper -q 12 -l 15000 > abiPC_Dor_12Q_15kb.
 # -l option referes to the minumum length in bp
 
 # This produced a read set with all reads over 12Q and longer than 15 kb in length
-# Canu_assembly_2 -Canu version
+# Canu_assembly_2 - Canu version(v2.2)
 # With the abiPC_Dor_12Q_15kb.fastq dataset 
 $ canu -p Pen_Y2 -d /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Canu_Assembly_2 genomeSize=30m -nanopore /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/abiPC_Dor_12Q_15kb.fastq
 #  the genomeSize=30m option sets the expected genome size to 30 Mb
 #  the -nanopore  option tells canu to expect nanopore read data
 
-#Flye Assembly with whole read set
+#Flye Assembly with whole read set (Flye v2.9.2)
 $ flye --nano-raw /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/PC_abi_trimmed_dorado.fastq --min-overlap 5000 --genome-size 30m -o /mnt/data/dayhoff/home/u6662175/PenYGenome/Dorado_reads/Everything_Flyes
 # --nano-raw tells flye what read data to expect, including what level of quality score Flye can expect
 # -min-overlap 5000 #This option sets the minimum overlap length in bp between two reads for assembly into contigs 
