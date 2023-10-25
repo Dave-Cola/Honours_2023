@@ -2,10 +2,7 @@
 #This is the NanoPlot general stats summary report for the Raw Guppy basecalled output
 #This is an example of a NanoPLot command i would run - all other options were defaults
 
-$ NanoPlot --outdir NPreults/ --prefix RAWduplex --fastq PYduplex.fastq
-
-#below is the general report output for the 
-
+$ NanoPlot -t 4 --outdir NPreults/ --prefix RAWduplex --fastq PYduplex.bam
 
 #This is the NanoPlot general report for the Raw Dorado (with duplex) basecalled output
 
@@ -78,7 +75,8 @@ Top 5 longest reads and their mean basecall quality score
 #Trimming adaptors using Porechop_ABI v_0.5.0 (The latest version of porechop that can use ab initio predcition to determine the adaptor sequences). 
 #The command was as follows. 
 $ porechop_abi -abi -i ~/PenYGenome/Dorado_reads/Wdx_PYduplex.fq -o abi_trimmed_dor2.fastq
-#output
+# the -abi option enables ab inito prediciton to search for adaptor sequences for trimming 
+#std output
 Trimming adapters from read ends
             SQK-NSK007_Y_Top: AATGTACTTCGTTCAGTTACGTATTGCT
          SQK-NSK007_Y_Bottom: GCAATACGTAACTGAACGAAGT
@@ -105,7 +103,10 @@ Splitting reads containing middle adapters
 
 73 / 304,973 reads were split based on middle adapters
 
-#I have also trimmed some both dorado and duplex with the ab initio prediction turned off which led to a similar amount of bases being trimmed. The Start adaptor was easily identified by the ab intio prediction algorithm, though it had trouble with the end adaptor.
+# The end adaptor was hard to identify
+
+#I have also trimmed without the ab initio prediction. 
+#This led to a similar amount of bases being trimmed. 
 #The command was as follows. 
 $ porechop_abi -i Wdx_PYduplex.fq -o NOabi_PC_dorado.gz
 Trimming adapters from read ends
